@@ -1,0 +1,31 @@
+package main;
+
+import "std/io";
+
+enum Color {
+    Black,
+    Red,
+    White
+}
+
+struct TestStruct {
+    x: i32,
+    y: i32
+}
+
+
+func foo(a: int, b: f32) -> f32 {
+    var fooStruct: TestStruct = TestStruct {
+        x: 1,
+        y: 2    
+    };
+
+    //asd.value_array[1].val.method(123, sdf, asd.value);
+    var myColor: Color = Color.Black;
+    var hello: int = 123;
+
+    io.println("{}", fooStruct.x);
+
+    return hello;
+}
+

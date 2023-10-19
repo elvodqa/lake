@@ -1,0 +1,12 @@
+package main;
+
+enum Color {
+    Red,
+    Green,
+    Blue
+}
+
+func main() -> int {
+    var c: Color = Color.Red;
+    return 0;
+}

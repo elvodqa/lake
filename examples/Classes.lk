@@ -1,0 +1,19 @@
+package main;
+
+class Parent {
+    function new() -> Parent {
+        return this;
+    }
+}
+
+class Child -> Parent {
+    function new() -> Child {
+        return this;
+    }
+}
+
+func main() -> int {
+    var p: Parent = Parent.new();
+    var c: Child = Child.new();
+    return 0;
+}

@@ -1,0 +1,11 @@
+package main;
+
+func main() -> int {
+    var a: int = 1;
+    var b: float = 2;
+    var c: bool = true;
+    var d: string = "Hello, World!";
+    var e: char = 'a';
+    var f: double = 3;
+    return 0;
+}

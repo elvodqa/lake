@@ -1,0 +1,86 @@
+start: statement+
+
+statement: assignment 
+    | expression ";" -> expression
+    | "package" id ";" -> package
+    | "return" expression ";" -> return
+    | "import" string ";" -> import_statement
+    | function -> function_decl
+    | struct_decl
+    | enum_decl
+    
+
+assignment: "var" id ":" id "=" expression ";" -> assignment_typed
+    | "var" id "=" expression ";" -> assignment_untyped
+    | id "=" expression ";" -> reassignment
+    | "var" id "=" array_content ";" -> heap_array
+    | "var" id "=" array_type array_content ";" -> stack_array
+    
+
+function: "func" id "(" [params*] ")" [type_decl] "{" statement+ "}"
+
+params: param ("," param)*
+param: id ":" id
+type_decl: "->" id
+
+#class: "class" id [type_decl] "{" statement+ "}"
+
+field: id ":" id
+struct_decl: "struct" id "{" field ("," field)* "}"
+struct_call: id "{" id ":" expression ("," id ":" expression)* "}"
+enum_decl: "enum" enum_name "{" enum_member ("," enum_member)* "}"
+enum_name: id
+enum_member: id
+
+array_content: "{" expression ("," expression)* "}" ";"
+array_type: id "[" expression "]" array_content
+
+
+function_call: id "(" [expression ("," expression)*] ")"
+
+# foo.bar().baz[] or foo.bar.baz etc... 
+member_access: expression ("." id | "." function_call | "." struct_call | "[" expression "]")
+
+
+#array_access: expression "[" expression "]"
+
+expression: expression "+" expression -> add
+    | expression "-" expression -> sub
+    | expression "*" expression -> mul
+    | expression "/" expression -> div
+    | expression "%" expression -> mod
+    | expression "^" expression -> powxs
+    | expression "==" expression -> eq
+    | expression "!=" expression -> neq
+    | expression "<" expression -> lt
+    | expression ">" expression -> gt
+    | expression "<=" expression -> lte
+    | expression ">=" expression -> gte
+    | expression "&&" expression -> and
+    | expression "||" expression -> or
+    | expression "?" expression ":" expression -> ternary
+    | expression "!" -> not
+    | expression "(" expression ")" -> parens
+    | id -> id
+    | integer -> integer
+    | string -> string
+    | "true" -> true
+    | "false" -> false
+    | "nil" -> nil
+    | struct_call -> struct_call
+    | function_call -> function_call
+    | member_access -> member_access
+    #| array_access -> array_access
+
+
+id: /[a-zA-Z_][a-zA-Z0-9_]*/
+string: STRING
+integer: INT
+INT: NUMBER
+COMMENT: /\/\/.*/
+
+%import COMMON.INT -> NUMBER
+%import common.ESCAPED_STRING -> STRING
+%import common.WS
+%ignore WS
+%ignore COMMENT

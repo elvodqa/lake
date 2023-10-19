@@ -1,0 +1,8 @@
+package main;
+
+import sys.io;
+
+func main() -> int {
+    io::println("Hello, World!");
+    return 0;
+}
