@@ -9,7 +9,7 @@ statement: assignment
     | struct_decl
     | enum_decl
     
-
+ 
 assignment: "var" id ":" id "=" expression ";" -> assignment_typed
     | "var" id "=" expression ";" -> assignment_untyped
     | id "=" expression ";" -> reassignment

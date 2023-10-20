@@ -19,7 +19,7 @@ func foo(a: int, b: f32) -> f32 {
         x: 1,
         y: 2    
     };
-
+    
     //asd.value_array[1].val.method(123, sdf, asd.value);
     var myColor: Color = Color.Black;
     var hello: int = 123;
