@@ -140,8 +140,8 @@ class TreeToLake(Transformer):
         return FunctionDecl(args)
     def assignment_typed(self, args):
         return AssignmentTyped(args)
-    def struct_call(self, args):
-        return StructCall(args)
+    #def struct_call(self, args):
+        #return StructCall(args)
 
     
 

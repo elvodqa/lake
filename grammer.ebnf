@@ -60,7 +60,7 @@ expression: expression "+" expression -> add
     | expression "||" expression -> or
     | expression "?" expression ":" expression -> ternary
     | expression "!" -> not
-    | expression "(" expression ")" -> parens
+    | expression? "(" expression ")" -> parens
     | id -> id
     | integer -> integer
     | string -> string
